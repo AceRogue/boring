@@ -104,7 +104,7 @@ pub use crate::ssl::error::{Error, ErrorCode, HandshakeError};
 
 mod bio;
 mod callbacks;
-mod cert_compression;
+pub mod cert_compression;
 mod connector;
 mod error;
 #[cfg(test)]
