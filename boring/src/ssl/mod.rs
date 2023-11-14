@@ -801,6 +801,21 @@ impl SslContextBuilder {
         }
     }
 
+    pub fn add_cert_compression_alg(
+        &mut self,
+        algorithm: CertCompressionAlgorithm,
+    ) -> Result<(), ErrorStack> {
+        unsafe {
+            cvt_0i(ffi::SSL_CTX_add_cert_compression_alg(
+                self.as_ptr(),
+                algorithm as _,
+                algorithm.compression_fn(),
+                algorithm.decompression_fn(),
+            ))
+            .map(|_| ())
+        }
+    }
+
     /// Returns a pointer to the raw OpenSSL value.
     pub fn as_ptr(&self) -> *mut ffi::SSL_CTX {
         self.ctx.as_ptr()
@@ -1377,21 +1392,6 @@ impl SslContextBuilder {
                 Some(callbacks::raw_alpn_select::<F>),
                 ptr::null_mut(),
             );
-        }
-    }
-
-    pub fn add_cert_compression_alg(
-        &mut self,
-        algorithm: CertCompressionAlgorithm,
-    ) -> Result<(), ErrorStack> {
-        unsafe {
-            cvt_0i(ffi::SSL_CTX_add_cert_compression_alg(
-                self.as_ptr(),
-                algorithm as _,
-                algorithm.compression_fn(),
-                algorithm.decompression_fn(),
-            ))
-            .map(|_| ())
         }
     }
 
