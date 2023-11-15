@@ -35,7 +35,7 @@ unsafe extern "C" fn brotli_compressor(
 
     let params = BrotliEncoderInitParams();
 
-    if let Err(_) = brotli::BrotliCompress(&mut uncompressed, &mut compressed, &params) {
+    if brotli::BrotliCompress(&mut uncompressed, &mut compressed, &params).is_err() {
         return 0;
     }
 
@@ -52,7 +52,7 @@ unsafe extern "C" fn brotli_decompressor(
     let mut compressed = slice::from_raw_parts(in_, in_len);
     let mut uncompressed: Vec<u8> = Vec::with_capacity(uncompressed_len);
 
-    if let Err(_) = brotli::BrotliDecompress(&mut compressed, &mut uncompressed) {
+    if brotli::BrotliDecompress(&mut compressed, &mut uncompressed).is_err() {
         return 0;
     }
 
@@ -68,5 +68,5 @@ unsafe extern "C" fn brotli_decompressor(
 
     *out = buffer;
 
-    return 1;
+    1
 }
