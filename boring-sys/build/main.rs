@@ -717,9 +717,12 @@ fn main() {
         "trust_token.h",
         "x509v3.h",
     ];
+
     for header in &headers {
         builder = builder.header(include_path.join("openssl").join(header).to_str().unwrap());
     }
+
+    // let builder = builder.header(include_path.join("../ssl/internal.h").to_str().unwrap());
 
     let bindings = builder.generate().expect("Unable to generate bindings");
     bindings
