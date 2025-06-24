@@ -1,7 +1,10 @@
 [package]
 name = "boring"
 version = { workspace = true }
-authors = ["Steven Fackler <sfackler@gmail.com>", "Ivan Nikulin <ifaaan@gmail.com>"]
+authors = [
+    "Steven Fackler <sfackler@gmail.com>",
+    "Ivan Nikulin <ifaaan@gmail.com>",
+]
 license = "Apache-2.0"
 description = "BoringSSL bindings"
 repository = { workspace = true }
@@ -90,7 +93,7 @@ foreign-types = { workspace = true }
 openssl-macros = { workspace = true }
 libc = { workspace = true }
 boring-sys = { workspace = true }
-
+brotli = { workspace = true }
 [dev-dependencies]
 hex = { workspace = true }
 rusty-hook = { workspace = true }
